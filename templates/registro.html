@@ -1,0 +1,14 @@
+{%include "base.html" %}
+
+
+{% block body %}
+
+<form method="post" action="{% url 'app:registro' %}">
+    {% csrf_token %}
+    <div class="form-outline mb-4">
+    {#<td>{{ form.username.label_tag}}</td#}
+        <td>{{form | bootstrap}}</td>
+        </div>
+        <button type="submit" class="btn btn-succes btn-lg btn-block float-end">iniciar sesion</button>
+</form>
+{% endblock %}

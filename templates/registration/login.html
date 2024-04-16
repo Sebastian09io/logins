@@ -1,0 +1,34 @@
+{%include "base.html" %}
+
+
+{% block body %}
+
+<!-- Codigo de errores -->
+{% if user.is_authenticated %}
+<div class="alert alert-info">Estas autenticado </div>
+{%else%}
+<div class="alert alert-info">Por favor, logueate bro </div> 
+{% endif %}
+
+{% if form.errors %}
+<div class="alert alert-danger">Username o Password incorrectos</div>
+{% endif %}
+
+<form method="post" action="{% url 'login' %}"> {% csrf_token %}
+
+<!-- Fin de errores -->
+<td>{{ form.username }} </td>
+<td>{{ form.password }} </td>
+<!-- Codigo de username y password -->
+<button type="submit" class="btn btn-success btn-lg btn-block float-end">Iniciar Sesion</button>
+
+</form>
+<!-- Fin de campos username y password -->
+
+<!-- Codigo de boton de crear, olvide la contraseña -->
+<input type=hidden name="next" value="{{next}}">
+<a href="{% url 'password_reset' %}">Olvide mi contraseña</a>
+<!-- fin de botones -->
+
+
+{% endblock %}

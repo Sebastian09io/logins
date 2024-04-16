@@ -1,0 +1,66 @@
+{%include "base.html" %}
+
+
+{% block body %}
+<div class="container">
+    <h1 class="mb-4">CRUD Laptop</h1>
+    <a href="{% url 'vistprb' %}" class="btn btn-warning btn-sm">form</a>
+
+    <div class="mx-auto" style="max-width: 400px;">
+        <!-- Formulario -->
+        <form action="{% url 'registro' %}" method="POST" class="mb-4 border p-4 rounded">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="kprocesador" class="form-label">Procesador</label>
+                <input type="text" id="kprocesador" name="kprocesador" class="form-control" placeholder="Procesador" required>
+            </div>
+            <div class="mb-3">
+                <label for="kgeneracion" class="form-label">Generación</label>
+                <input type="text" id="kgeneracion" name="kgeneracion" class="form-control" placeholder="Generación" required>
+            </div>
+            <div class="mb-3">
+                <label for="ksistema" class="form-label">Sistema</label>
+                <input type="text" id="ksistema" name="ksistema" class="form-control" placeholder="Sistema" required>
+            </div>
+            <div class="mb-3">
+                <label for="kram" class="form-label">RAM</label>
+                <input type="text" id="kram" name="kram" class="form-control" placeholder="Ram" required>
+            </div>
+            <div class="mb-3">
+                <label for="krom" class="form-label">ROM</label>
+                <input type="text" id="krom" name="krom" class="form-control" placeholder="Rom" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+</div>
+    <!-- Tabla -->
+<table class="table table-striped table-bordered">
+<thead class="table-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Procesador</th>
+        <th scope="col">Generación</th>
+        <th scope="col">Sistema</th>
+        <th scope="col">RAM</th>
+        <th scope="col">ROM</th>
+        <th colspan="2" scope="col">Modificación</th>
+    </tr>
+</thead>
+<tbody>
+    {% for c in compu %}
+    <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ c.procesador }}</td>
+        <td>{{ c.generacion }}</td>
+        <td>{{ c.sistema }}</td>
+        <td>{{ c.ram }}</td>
+        <td>{{ c.rom }}</td>
+        <td><a href="{% url 'vistae' c.id %}" class="btn btn-warning btn-sm">Editar</a></td>
+        <td><a href="{% url 'eliminarc' c.id %}" class="btn btn-danger btn-sm">Eliminar</a></td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+{% endblock %}

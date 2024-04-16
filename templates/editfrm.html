@@ -1,0 +1,40 @@
+{%include "base.html" %}
+
+
+{% block body %}
+    <div class="container">
+        <h1 class="mb-4">Editando Laptop</h1>
+        <div class="mx-auto" style="max-width: 400px;">
+            <!-- Formulario -->
+    <form action="{%url 'modificando' laptop.id %}" method="POST" class="mb-4 border p-4 rounded">{%csrf_token%}
+        <div class="mb-3">
+            <label for="kprocesador" class="form-label">Procesador</label>
+            <input type="text" id="kprocesador" name="kprocesador" class="form-control" value="{{laptop.procesador}}" placeholder="procesador" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="kgeneracion" class="form-label">Generación</label>
+            <input type="text" id="kgeneracion" name="kgeneracion" class="form-control" value="{{laptop.generacion}}" placeholder="generacion" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="ksistema" class="form-label">Sistema</label>
+            <input type="text" id="ksistema" name="ksistema" class="form-control" value="{{laptop.sistema}}" placeholder="sistema" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="kram" class="form-label">RAM</label>
+            <input type="text" id="kram" name="kram" class="form-control" value="{{laptop.ram}}" placeholder="ram"  required>
+        </div>
+
+        <div class="mb-3">
+            <label for="krom" class="form-label">ROM</label>
+            <input type="text" id="krom" name="krom" class="form-control" value="{{laptop.rom}}" placeholder="rom" required>
+        </div>
+        <button type="submit" class="btn btn-primary">guardar</button>
+    
+    </form>
+</div>
+</div>
+
+{% endblock %}
