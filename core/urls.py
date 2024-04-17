@@ -36,14 +36,14 @@ urlpatterns = [
     #del login registrar
     # path('',views.inicio,name="inicio"),
     # path('user_data/',views.user_data,name="user_data"),
-    # path('profile/',views.profile,name="profile"),
-    # path('registro/',views.registro,name="registro"),
+    path('profile/',views.profile,name="profile"),
+    path('registro/',views.registro,name="registro"),
     # path("app/", include("apps.laptops.urls")),
 
     path("accounts/",include("django.contrib.auth.urls"),name="login"),
     # path("cambiar-clave/",auth_views.PasswordChangeView.as_view(template_name="registration/
     # password_change_form.html")),
-    # path('logout/', views.logout_view, name='logout'),
+    path('logout/', views.logout_view, name='logout'),
 ]
 
 #Para consumir archivos media

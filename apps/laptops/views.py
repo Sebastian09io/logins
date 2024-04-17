@@ -98,7 +98,7 @@ def registro(request):
             user=form.save()
             if user is not None:
                 make_login(request,user)
-                return redirect(reverse("app:profile"))
+                return redirect(reverse("profile"))
     return render(request,'registro.html',{'form':form})
 
 @login_required
@@ -134,8 +134,10 @@ def logout_view(request):
     perfil out
     """
     logout(request)
-    return redirect('login:login')
+    return redirect('login')
 
 def funruta(request):
-    
-    return render(request,'iniciarruta.html')
+    """
+    pasa de login a principal
+    """
+    return render(request,'registration/profile.html')

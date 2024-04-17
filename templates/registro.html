@@ -2,13 +2,13 @@
 
 
 {% block body %}
-
-<form method="post" action="{% url 'app:registro' %}">
+<div class="mx-auto" style="max-width: 40%;">
+<form method="post" action="{% url 'registro' %}" class="mb-4 border p-4 rounded">
     {% csrf_token %}
     <div class="form-outline mb-4">
-    {#<td>{{ form.username.label_tag}}</td#}
-        <td>{{form | bootstrap}}</td>
+        <td>{{form }}</td>
         </div>
-        <button type="submit" class="btn btn-succes btn-lg btn-block float-end">iniciar sesion</button>
+        <button type="submit" class="btn btn-primary">iniciar sesion</button>
 </form>
+</div>
 {% endblock %}
