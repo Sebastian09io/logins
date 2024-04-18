@@ -54,3 +54,6 @@ class UserPerfil(models.Model):
     objects = models.Manager()
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     avatar=models.ImageField(upload_to="user/avatar/")
+    
+    
+    
