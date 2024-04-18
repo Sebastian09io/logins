@@ -34,7 +34,7 @@ def registrar(request):
         ram = request.POST['kram']
         rom = request.POST['krom']
         comp=Laptop.objects.create(procesador=procesador,generacion=generacion,
-                                   sistema=sistema,ram=ram,rom=rom)
+                                sistema=sistema,ram=ram,rom=rom)
         return redirect('/')
 
 def eliminar(request, id):
