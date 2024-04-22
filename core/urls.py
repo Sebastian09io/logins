@@ -26,7 +26,7 @@ app_name="app"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',principal),
+    path('',views.principal,name='inicio'),
     path('registrarCompu/',views.registrar,name='registro'),
     path('vistaed/<int:id>',views.vistaeditar, name='vistae'),
     path('funeditarCompu/<int:id>',views.funcioneditar, name='modificando'),
@@ -44,6 +44,11 @@ urlpatterns = [
     # path("cambiar-clave/",auth_views.PasswordChangeView.as_view(template_name="registration/
     # password_change_form.html")),
     path('logout/', views.logout_view, name='logout'),
+    path('pag/',views.paginacion,name="pagina"),
+    path('buscar/', views.buscar, name='buscar'),
+    path('busq/',views.pagbusq,name="busqueda"),
+
+    
 ]
 
 #Para consumir archivos media

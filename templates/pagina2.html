@@ -1,0 +1,33 @@
+
+
+<div class="row mt-3 justify-content-center">
+    <nav>
+        <ul class="pagination">
+            {%if posts.has_previous%}
+            <li class="page-item">
+                <a class="page-link" href="?page=1">Primera</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{posts.previous_page_number}}"> &laquo;</a>
+            </li>
+            {%endif%}
+
+            {% for pagina in npagina  %}
+            <li class="page-item" {% if pagina_actual == pagina %} active{% endif %}>
+                <a class="page-link" href="?page={{pagina}}">{{pagina}}</a>
+            </li>
+            {% endfor %}
+
+            {%if posts.has_next%}
+            <li class="page-item">
+                <a class="page-link" href="?page={{posts.next_page_number}}">&raquo;</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{posts.paginator.num_pages}}">Ultima</a>
+            </li>
+            {%endif%}
+
+        </ul>
+    </nav>
+</div>
+

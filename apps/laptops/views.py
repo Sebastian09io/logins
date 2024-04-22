@@ -9,7 +9,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login as make_login
 from django.contrib.auth import logout
 from django.conf import settings
+from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.paginator import Paginator
 from apps.laptops.models import UserPerfil
 from .forms import CustomUserCreationForm, LaptopForm, UserPerfilform
 from .models import Laptop
@@ -141,3 +143,43 @@ def funruta(request):
     pasa de login a principal
     """
     return render(request,'registration/profile.html')
+
+def paginacion(request):
+    """
+    entra a la vista de paginacion
+    """
+    laptops_listadas = Laptop.objects.all()
+    paginator=Paginator(laptops_listadas, 3)
+    pagina=request.GET.get("page") or 1
+    posts =paginator.get_page(pagina)
+    pagina_actual=int(pagina)
+    npagina = range(1,posts.paginator.num_pages + 1)
+    return render(request,'paggina.html', {"posts":posts,
+                                        "npagina":npagina, "pagina_actual":pagina_actual})
+    
+    # views.py
+
+def buscar(request):
+    # Recuperar la consulta de búsqueda del parámetro GET
+    query = request.GET.get('buscar', '')
+
+    # Inicializar resultados como una lista vacía
+    resultados = []
+
+    if query:
+        # Filtrar resultados por coincidencias en varios campos
+        resultados = Laptop.objects.filter(
+            Q(procesador__icontains=query) | 
+            Q(generacion__icontains=query) | 
+            Q(sistema__icontains=query) | 
+            Q(ram__icontains=query) | 
+            Q(rom__icontains=query)
+        )
+    
+    return render(request, 'busqueda.html', {'resultados': resultados, 'query': query})
+
+def pagbusq(request):
+    
+    return render(request,'busqueda.html')
+
+
