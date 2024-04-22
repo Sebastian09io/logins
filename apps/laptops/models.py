@@ -3,6 +3,8 @@ Este módulo define los modelos de la aplicación de laptops.
 """
 from django.db import models
 from django.contrib.auth.models import User
+from .managers import UsuarioManager
+from django.contrib.auth.models import AbstractBaseUser
 # modelo de laptop, relacion uno a muchos laptop-entorno
 class Laptop(models.Model):
     """
@@ -56,4 +58,23 @@ class UserPerfil(models.Model):
     avatar=models.ImageField(upload_to="user/avatar/")
     
     
+#model de login modificado
+class Usuario(AbstractBaseUser):
+    """
+    modelo usuario modificado
+    """
+    numero_identificacion=models.IntegerField(null=True, blank=True)
+    nombre=models.CharField(max_length=100)
+    apellido=models.CharField(max_length=100)
+    correo=models.EmailField(unique=True)
+    fecha_nacimiento=models.DateField(null=True, blank=True)
     
+    #acceso
+    is_active=models.BooleanField("Habilitado",default=True)
+    is_staff=models.BooleanField ("Acceso al admin",default=False)
+    is_superu=models.BooleanField("Acceso al admin",default=False)
+    
+    USERNAME_FIELD ='correo'
+    REQUIRED_FIELDS=["apellido"]
+    
+    objects=UsuarioManager()
