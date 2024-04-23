@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login as make_login
 from django.contrib.auth import logout
+from django.views.generic import TemplateView, ListView
 from django.conf import settings
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
@@ -17,12 +18,15 @@ from .forms import CustomUserCreationForm, LaptopForm, UserPerfilform
 from .models import Laptop
 
 # funciones de vistas.
-def principal(request):
+class principal(ListView):
     """
     funcion de la vista principal
     """
-    laptops_listadas = Laptop.objects.all()
-    return render(request,'contenido.html', {"compu":laptops_listadas})
+    model=Laptop
+    template_name='contenido.html'
+    context_object_name='compu'
+    queryset=Laptop.objects.all()
+    
 
 #crud
 def registrar(request):
@@ -178,8 +182,10 @@ def buscar(request):
     
     return render(request, 'busqueda.html', {'resultados': resultados, 'query': query})
 
-def pagbusq(request):
+class Pagbusq(TemplateView):
     
-    return render(request,'busqueda.html')
+    template_name='busqueda.html'
+    
+    
 
 

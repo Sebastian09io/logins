@@ -19,15 +19,15 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from apps.laptops import views
-from apps.laptops.views import principal, funruta
+from apps.laptops.views import principal, funruta, Pagbusq
 
 
 app_name="app"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.principal,name='inicio'),
-    path('registrarCompu/',views.registrar,name='registro'),
+    path('',principal.as_view(),name='inicio'),
+    path('registrarCompu/',views.registrar,name='registrar'),
     path('vistaed/<int:id>',views.vistaeditar, name='vistae'),
     path('funeditarCompu/<int:id>',views.funcioneditar, name='modificando'),
     path('eliminarcompu/<int:id>',views.eliminar, name='eliminarc'),
@@ -46,7 +46,8 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('pag/',views.paginacion,name="pagina"),
     path('buscar/', views.buscar, name='buscar'),
-    path('busq/',views.pagbusq,name="busqueda"),
+    path('busq/',Pagbusq.as_view(),name="busqueda"),
+
 
     
 ]
